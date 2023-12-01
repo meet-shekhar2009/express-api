@@ -15,6 +15,7 @@ const routes = require('./Routes/Route');
 app.use('/', routes);
 
 //start server
-app.listen(process.env.port || 5800, () => {
-  console.log('listeniing at port:5800');
+const PORT = process.env.PORT || 5800;
+app.listen(PORT, () => {
+  console.log('listeniing at port:' + PORT);
 });

@@ -1,1 +1,65 @@
-{"578882":{"name":"test","amount":"99","ChildrenIds":[],"id":"578882","modifiedOn":1701193116819},"765902":{"name":"dumbo","amount":"56","ChildrenIds":[],"id":"765902","modifiedOn":1701195762389}}
+{
+  "115719": {
+    "name": "Gas",
+    "amount": "1200",
+    "ChildrenIds": [],
+    "id": "291126c9-25e8-44a2-b699-c27b1026bbb6",
+    "modifiedOn": 1701325344854
+  },
+  "235844": {
+    "name": "Internet",
+    "amount": "1590",
+    "ChildrenIds": [],
+    "id": "24ab0f16-741b-4740-a15b-d665efc9422e",
+    "modifiedOn": 1701325294242
+  },
+  "246425": {
+    "name": "Electricity",
+    "amount": "2200",
+    "ChildrenIds": [],
+    "id": "cc7ac25f-b281-4083-bd53-a1710ea1193a",
+    "modifiedOn": 1701325325474
+  },
+  "397276": {
+    "name": "Maid",
+    "amount": "2000",
+    "ChildrenIds": [],
+    "id": "e602df93-e3ab-4878-849e-7df10d1fd78d",
+    "modifiedOn": 1701325010332
+  },
+  "708670": {
+    "name": "PPF",
+    "amount": "10000",
+    "ChildrenIds": [],
+    "id": "f25906f6-33bc-419d-baf8-51217f727af3",
+    "modifiedOn": 1701323496536
+  },
+  "756554": {
+    "name": "Common",
+    "amount": "2490",
+    "ChildrenIds": [],
+    "id": "b57fa48f-2e9d-4deb-88e2-708cdc8f1e0c",
+    "modifiedOn": 1701325397333
+  },
+  "833477": {
+    "name": "Icic Credit Card",
+    "amount": "10056",
+    "ChildrenIds": [],
+    "id": "e2b56bf8-fece-402a-a21d-d8f2228fe129",
+    "modifiedOn": 1701324041425
+  },
+  "923513": {
+    "name": "Nutan",
+    "amount": "5000",
+    "ChildrenIds": [],
+    "id": "d39755dc-d296-4d0c-be79-4acf27d5d5f6",
+    "modifiedOn": 1701324914807
+  },
+  "987717": {
+    "name": "HDFC Credit Card",
+    "amount": "23851",
+    "ChildrenIds": [],
+    "id": "1bbcfb3b-1d36-469e-8009-0b61edf69d18",
+    "modifiedOn": 1701324590955
+  }
+}

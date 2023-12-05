@@ -1,4 +1,5 @@
 const express = require('express');
+//const axios = require('axios');
 const accountRoutes = express.Router();
 const fs = require('fs');
 
@@ -47,6 +48,11 @@ accountRoutes.post(`${baseUrl}/add`, (req, res) => {
 accountRoutes.get(`${baseUrl}/list`, (req, res) => {
   const accounts = getAccountData();
   res.send(accounts);
+});
+
+accountRoutes.get(`${baseUrl}/:id`, (req, res) => {
+  const accounts = getAccountData();
+  res.send(accounts[req.params['id']]);
 });
 
 // Update - using Put method
@@ -104,4 +110,36 @@ accountRoutes.delete(`${baseUrl}/delete/:id`, (req, res) => {
     true
   );
 });
+
+// accountRoutes.get(`${baseUrl}/filesync`, (req, res) => {
+//   const updatemeta = {
+//     user: 'meet.shekhar2009',
+//     time: new Date().toDateString(),
+//   };
+
+//   var data = JSON.stringify({
+//     message: 'txt file',
+//     content: `${JSON.stringify(updatemeta)}`,
+//   });
+//   const token = `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`;
+//   var config = {
+//     method: 'put',
+//     url: 'https://github.com/meet-shekhar2009/express-api/blob/main/test.json',
+//     headers: {
+//       Authorization: `Bearer ${token}`,
+//       'Content-Type': 'application/json',
+//     },
+//     data: data,
+//   };
+
+//   axios(config)
+//     .then(function (response) {
+//       res.send(response);
+//       console.log(JSON.stringify(response.data));
+//     })
+//     .catch(function (error) {
+//       res.send(error);
+//       console.log(error);
+//     });
+// });
 module.exports = accountRoutes;

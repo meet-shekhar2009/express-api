@@ -58,6 +58,8 @@ accountRoutes.get(`${baseUrl}/list`, (req, res) => {
   const accounts = getAccountData();
   res.send(accounts);
 });
+
+//get mongodb data
 accountRoutes.get(`${baseUrl}/mongo`, async (req, res) => {
   const users = await User.find({});
   res.send(users);

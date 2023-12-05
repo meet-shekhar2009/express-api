@@ -1,10 +1,19 @@
 const express = require('express');
-//const axios = require('axios');
+const mongoose = require('mongoose');
+const initdb = require('../mongooseProvider');
+
 const accountRoutes = express.Router();
 const fs = require('fs');
 
 const baseUrl = '/api';
 // util functions
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  age: Number,
+});
+const User = mongoose.model('practice', userSchema);
 
 function getModifyOn() {
   return new Date().getTime();
@@ -48,6 +57,10 @@ accountRoutes.post(`${baseUrl}/add`, (req, res) => {
 accountRoutes.get(`${baseUrl}/list`, (req, res) => {
   const accounts = getAccountData();
   res.send(accounts);
+});
+accountRoutes.get(`${baseUrl}/mongo`, async (req, res) => {
+  const users = await User.find({});
+  res.send(users);
 });
 
 accountRoutes.get(`${baseUrl}/:id`, (req, res) => {
@@ -111,35 +124,4 @@ accountRoutes.delete(`${baseUrl}/delete/:id`, (req, res) => {
   );
 });
 
-// accountRoutes.get(`${baseUrl}/filesync`, (req, res) => {
-//   const updatemeta = {
-//     user: 'meet.shekhar2009',
-//     time: new Date().toDateString(),
-//   };
-
-//   var data = JSON.stringify({
-//     message: 'txt file',
-//     content: `${JSON.stringify(updatemeta)}`,
-//   });
-//   const token = `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`;
-//   var config = {
-//     method: 'put',
-//     url: 'https://github.com/meet-shekhar2009/express-api/blob/main/test.json',
-//     headers: {
-//       Authorization: `Bearer ${token}`,
-//       'Content-Type': 'application/json',
-//     },
-//     data: data,
-//   };
-
-//   axios(config)
-//     .then(function (response) {
-//       res.send(response);
-//       console.log(JSON.stringify(response.data));
-//     })
-//     .catch(function (error) {
-//       res.send(error);
-//       console.log(error);
-//     });
-// });
 module.exports = accountRoutes;

@@ -1,19 +1,10 @@
 const express = require('express');
-const mongoose = require('mongoose');
-const initdb = require('../mongooseProvider');
 
 const accountRoutes = express.Router();
 const fs = require('fs');
 
 const baseUrl = '/api';
 // util functions
-
-const userSchema = new mongoose.Schema({
-  name: String,
-  email: String,
-  age: Number,
-});
-const User = mongoose.model('practice', userSchema);
 
 function getModifyOn() {
   return new Date().getTime();
@@ -57,12 +48,6 @@ accountRoutes.post(`${baseUrl}/add`, (req, res) => {
 accountRoutes.get(`${baseUrl}/list`, (req, res) => {
   const accounts = getAccountData();
   res.send(accounts);
-});
-
-//get mongodb data
-accountRoutes.get(`${baseUrl}/mongo`, async (req, res) => {
-  const users = await User.find({});
-  res.send(users);
 });
 
 accountRoutes.get(`${baseUrl}/:id`, (req, res) => {

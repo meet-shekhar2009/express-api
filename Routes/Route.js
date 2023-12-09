@@ -29,6 +29,7 @@ function model() {
 }
 
 router.use((req, res, next) => {
+  console.log(req);
   if (!req.headers.dbname) {
     res.send(`Error: dbName name is not supplied to headers`);
   } else {

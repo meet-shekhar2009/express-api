@@ -8,6 +8,7 @@ function DMLResponse(msg) {
 }
 
 accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
+  console.log(req.body);
   const model = new req.model(req.body);
   await model.save();
   res.send(DMLResponse('data added successfully'));

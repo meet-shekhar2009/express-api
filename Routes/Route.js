@@ -32,11 +32,6 @@ router.use((req, res, next) => {
   if (!req.headers.dbname) {
     res.send(`Error: dbName name is not supplied to headers`);
   } else {
-    const files = utils.getFiles(dbPath);
-    const dbName = `${req.headers.dbname}.json`;
-    if (!files.some((k) => k == dbName)) {
-      utils.createFile(`${appDir}/db/${dbName}`);
-    }
     if (!req.headers.dbtype) {
       res.send(
         `Error: dbtype name is not supplied to headers,should be mongo | json`
@@ -45,6 +40,12 @@ router.use((req, res, next) => {
     if (req.headers.dbtype === 'mongo') {
       req.model = model()(req.headers.dbname);
     } else {
+      const files = utils.getFiles(dbPath);
+      const dbName = `${req.headers.dbname}.json`;
+      if (!files.some((k) => k == dbName)) {
+        utils.createFile(`${appDir}/db/${dbName}`);
+      }
+
       const databasePath = './db/' + dbName;
       process.env.databasePath = databasePath;
     }

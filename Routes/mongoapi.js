@@ -8,19 +8,37 @@ function DMLResponse(msg) {
 }
 
 accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
-  console.log(req.body);
-  const model = new req.model(req.body);
+  let input = req.body || {};
+  if (req.headers.usersession) {
+    const { username } = req.headers.usersession;
+    input = { ...input, username };
+  }
+  const model = new req.model();
   await model.save();
   res.send(DMLResponse('data added successfully'));
 });
 
 accountRoutes.post(`${baseUrl}/findone`, async (req, res) => {
-  const todo = await req.model.findOne(req.body);
+  let include = {};
+  if (req.headers.include) {
+    include = { ...include, ...JSON.parse(req.headers.include) };
+  }
+
+  const todo = await req.model.findOne(req.body, include);
   res.json(todo);
 });
 
 accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
-  const result = await req.model.find({});
+  let input = {};
+  if (req.headers.usersession) {
+    const { username } = req.headers.usersession;
+    input = { ...input, username };
+  }
+  let include = {};
+  if (req.headers.include) {
+    include = { ...include, ...JSON.parse(req.headers.include) };
+  }
+  const result = await req.model.find(input, include);
 
   res.send(result);
 });

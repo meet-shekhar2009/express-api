@@ -10,11 +10,10 @@ function DMLResponse(msg) {
 accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
   let input = req.body || {};
   if (req.headers.usersession) {
-    const { username } = req.headers.usersession;
+    const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
-  console.log('session : ', req.headers.usersession);
-  console.log('input : ', input);
+
   const model = new req.model(input);
 
   await model.save();
@@ -34,7 +33,7 @@ accountRoutes.post(`${baseUrl}/findone`, async (req, res) => {
 accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
   let input = {};
   if (req.headers.usersession) {
-    const { username } = req.headers.usersession;
+    const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
   let include = {};

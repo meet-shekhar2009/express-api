@@ -13,7 +13,10 @@ accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
     const { username } = req.headers.usersession;
     input = { ...input, username };
   }
+  console.log('session : ', req.headers.usersession);
+  console.log('input : ', input);
   const model = new req.model(input);
+
   await model.save();
   res.send(DMLResponse('data added successfully'));
 });

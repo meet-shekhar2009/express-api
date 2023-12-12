@@ -13,7 +13,7 @@ accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
     const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
-
+  console.log(input);
   const model = new req.model(input);
 
   await model.save();

@@ -6,14 +6,15 @@ const baseUrl = '/rest/api';
 function DMLResponse(msg) {
   return { success: true, msg };
 }
-
+function getCurrentDate() {
+  return { modifiedOn: new Date() };
+}
 accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
   let input = req.body || {};
   if (req.headers.usersession) {
     const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
-  console.log(input);
   const model = new req.model(input);
 
   await model.save();
@@ -34,7 +35,7 @@ accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
   let input = {};
   if (req.headers.usersession) {
     const { username } = JSON.parse(req.headers.usersession);
-    input = { ...input, username };
+    input = { ...input, username, ...getCurrentDate() };
   }
   let include = {};
   if (req.headers.include) {
@@ -52,7 +53,8 @@ accountRoutes.get(`${baseUrl}/get/:id`, async (req, res) => {
 
 // Update - using Put method
 accountRoutes.put(`${baseUrl}/put/:id`, async (req, res) => {
-  const bodydata = req.body;
+  let bodydata = req.body;
+  bodydata = { ...bodydata, ...getCurrentDate() };
   delete body.id;
 
   const updatedTodo = await req.model.findByIdAndUpdate(
@@ -65,7 +67,8 @@ accountRoutes.put(`${baseUrl}/put/:id`, async (req, res) => {
 
 // Patch - using Patch method
 accountRoutes.patch(`${baseUrl}/patch/:id`, async (req, res) => {
-  const bodydata = req.body;
+  let bodydata = req.body;
+  bodydata = { ...bodydata, ...getCurrentDate() };
   delete bodydata.id;
 
   const updatedTodo = await req.model.findByIdAndUpdate(

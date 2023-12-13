@@ -38,7 +38,7 @@ accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
     const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
-  let include = { username };
+  let include = {};
   if (req.headers.include) {
     include = { ...include, ...JSON.parse(req.headers.include) };
   }

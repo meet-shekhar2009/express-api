@@ -36,9 +36,7 @@ accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
 
   if (req.headers.usersession) {
     const { username } = JSON.parse(req.headers.usersession);
-
-    input = { ...input, username, ...getCurrentDate() };
-    console.log('input', input);
+    input = { ...input, username };
   }
   let include = {};
   if (req.headers.include) {

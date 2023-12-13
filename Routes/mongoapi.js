@@ -38,6 +38,22 @@ accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
     const { username } = JSON.parse(req.headers.usersession);
     input = { ...input, username };
   }
+  let include = { username };
+  if (req.headers.include) {
+    include = { ...include, ...JSON.parse(req.headers.include) };
+  }
+  const result = await req.model.find(input, include);
+
+  res.send(result);
+});
+
+accountRoutes.post(`${baseUrl}/query`, async (req, res) => {
+  let input = req.body || {};
+
+  if (req.headers.usersession) {
+    let { username } = JSON.parse(req.headers.usersession);
+    input = { ...input, username };
+  }
   let include = {};
   if (req.headers.include) {
     include = { ...include, ...JSON.parse(req.headers.include) };

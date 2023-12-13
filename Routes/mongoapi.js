@@ -13,7 +13,7 @@ accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
   let input = req.body || {};
   if (req.headers.usersession) {
     const { username } = JSON.parse(req.headers.usersession);
-    input = { ...input, username };
+    input = { ...input, username, ...getCurrentDate() };
   }
   const model = new req.model(input);
 
@@ -33,8 +33,10 @@ accountRoutes.post(`${baseUrl}/findone`, async (req, res) => {
 
 accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
   let input = {};
+  console.log(req.headers.usersession);
   if (req.headers.usersession) {
     const { username } = JSON.parse(req.headers.usersession);
+    console.log('user', username);
     input = { ...input, username, ...getCurrentDate() };
   }
   let include = {};

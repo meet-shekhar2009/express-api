@@ -31,6 +31,18 @@ accountRoutes.post(`${baseUrl}/findone`, async (req, res) => {
   res.json(todo);
 });
 
+accountRoutes.post(`${baseUrl}/deletemany`, async (req, res) => {
+  let input = req.body || {};
+
+  if (req.headers.usersession) {
+    let { username } = JSON.parse(req.headers.usersession);
+    input = { ...input, username };
+  }
+
+  const deletedTodo = await req.model.deleteMany(input);
+  res.json(deletedTodo);
+});
+
 accountRoutes.get(`${baseUrl}/list`, async (req, res) => {
   let input = {};
 

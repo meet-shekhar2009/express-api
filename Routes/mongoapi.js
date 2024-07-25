@@ -3,8 +3,8 @@ const accountRoutes = express.Router();
 
 const baseUrl = '/rest/api';
 
-function DMLResponse(msg) {
-  return { success: true, msg };
+function DMLResponse(msg, data = null) {
+  return { success: true, msg, data };
 }
 function getCurrentDate() {
   return { modifiedOn: new Date() };
@@ -17,8 +17,8 @@ accountRoutes.post(`${baseUrl}/add`, async (req, res) => {
   }
   const model = new req.model(input);
 
-  await model.save();
-  res.send(DMLResponse('data added successfully'));
+  const response = await model.save();
+  res.send(DMLResponse('data added successfully', response));
 });
 
 accountRoutes.post(`${baseUrl}/findone`, async (req, res) => {
